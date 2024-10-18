@@ -35,7 +35,7 @@ ___TEMPLATE_PARAMETERS___
         "help": "Convert data to string"
       },
       {
-        "value": "prase",
+        "value": "parse",
         "displayValue": "Parse",
         "help": "Parse string to JSON"
       }
