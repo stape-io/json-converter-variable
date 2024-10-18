@@ -63,14 +63,15 @@ ___SANDBOXED_JS_FOR_SERVER___
 const JSON = require('JSON');
 const raw_data = data.rawData || undefined;
 
+
 if(!raw_data){
-  if(data.actionType == 'stringify') {
-  return JSON.stringify(raw_data);
-  } else if(typeof raw_data === 'string'){
-    return JSON.parse(raw_data);
-  }
+  return '';
 }
-return '';
+if(data.actionType == 'parse' && typeof raw_data === 'string') {
+  return JSON.parse(raw_data);
+} else {
+  return JSON.stringify(raw_data);
+}
 
 
 ___TESTS___
@@ -100,8 +101,20 @@ scenarios:
     assertThat(variableResult).isEqualTo({price: 69, currency: 'USD'});
 - name: Wrong data
   code: |-
+    // return stringify if try to parse some other type then string
     const mockData = {
       rawData: 123,
+      actionType: 'parse'
+    };
+
+    let variableResult = runCode(mockData);
+
+    assertThat(variableResult).isEqualTo('123');
+- name: No data
+  code: |-
+    // return empty string if no data
+    const mockData = {
+      rawData: undefined,
       actionType: 'parse'
     };
 
