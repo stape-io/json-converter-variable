@@ -8,7 +8,7 @@ The configuration process is straightforward. You will need to choose the needed
 
 **Stringify** - convert data to string.
 
-**Parse**- parse string to JSON format.
+**Parse** - parse string to JSON format.
 
 And specify the format of the value that will be output by this variable.
 
